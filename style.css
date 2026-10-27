@@ -487,7 +487,7 @@ section.statement .checks li { display:flex !important; align-items:flex-start !
   width:100%!important; height:100%!important; max-width:none!important;
   object-fit:cover!important; object-position:center 45%!important;
   opacity:0!important; visibility:visible!important; z-index:1!important;
-  transform:scale(1.08) translate3d(0,0,0)!important;
+  transform:scale(1.08) translate3d(0,0,0);
   transition:opacity 1.65s ease-in-out!important;
   animation:none!important; will-change:opacity,transform;
   backface-visibility:hidden;
@@ -504,8 +504,8 @@ section.statement .checks li { display:flex !important; align-items:flex-start !
 .hero:after { z-index:3!important; pointer-events:none!important; }
 .hero>.container,.hero-caption,.scroll-cue,.side-note {position:relative;z-index:4}
 @keyframes rouseSlowPan {
-  0% { transform:scale(1.06) translate3d(.7%,.25%,0)!important; }
-  100% { transform:scale(1.16) translate3d(-1.2%,-.65%,0)!important; }
+  0% { transform:scale(1.06) translate3d(.7%,.25%,0); }
+  100% { transform:scale(1.16) translate3d(-1.2%,-.65%,0); }
 }
 @media(max-width:760px) {
  .hero .hero-media.hero-slideshow .hero-photo {object-position:center center!important}
@@ -534,20 +534,20 @@ section.statement .checks li { display:flex !important; align-items:flex-start !
   animation-name: rousePanDown!important;
 }
 @keyframes rousePanLeft {
-  0% { transform:scale(1.07) translate3d(1.4%,.2%,0)!important; }
-  100% { transform:scale(1.17) translate3d(-1.5%,-.7%,0)!important; }
+  0% { transform:scale(1.07) translate3d(1.4%,.2%,0); }
+  100% { transform:scale(1.17) translate3d(-1.5%,-.7%,0); }
 }
 @keyframes rousePanRight {
-  0% { transform:scale(1.08) translate3d(-1.4%,.2%,0)!important; }
-  100% { transform:scale(1.17) translate3d(1.5%,-.6%,0)!important; }
+  0% { transform:scale(1.08) translate3d(-1.4%,.2%,0); }
+  100% { transform:scale(1.17) translate3d(1.5%,-.6%,0); }
 }
 @keyframes rousePanUp {
-  0% { transform:scale(1.07) translate3d(.4%,1.1%,0)!important; }
-  100% { transform:scale(1.16) translate3d(-.6%,-1.2%,0)!important; }
+  0% { transform:scale(1.07) translate3d(.4%,1.1%,0); }
+  100% { transform:scale(1.16) translate3d(-.6%,-1.2%,0); }
 }
 @keyframes rousePanDown {
-  0% { transform:scale(1.08) translate3d(-.6%,-1.1%,0)!important; }
-  100% { transform:scale(1.17) translate3d(.7%,1.1%,0)!important; }
+  0% { transform:scale(1.08) translate3d(-.6%,-1.1%,0); }
+  100% { transform:scale(1.17) translate3d(.7%,1.1%,0); }
 }
 @media(prefers-reduced-motion:reduce) {
  .hero .hero-media.hero-slideshow .hero-photo.is-active {animation:none!important;transform:scale(1.05)!important}
