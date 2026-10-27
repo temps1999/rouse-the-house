@@ -475,3 +475,42 @@ section.statement .checks li { display:flex !important; align-items:flex-start !
 .hero .hero-media { position:absolute !important; inset:0 !important; display:block !important; }
 .hero .hero-media img.hero-slide { opacity:0 !important; visibility:visible !important; }
 .hero .hero-media img.hero-slide.active { opacity:1 !important; visibility:visible !important; }
+
+
+/* Native photo slideshow: no video element, no play control, iOS-friendly. */
+.hero .hero-media.hero-slideshow {
+  position:absolute!important; inset:0!important; overflow:hidden!important;
+  isolation:isolate!important; z-index:0!important; background:#071d2a!important;
+}
+.hero .hero-media.hero-slideshow .hero-photo {
+  position:absolute!important; inset:0!important; display:block!important;
+  width:100%!important; height:100%!important; max-width:none!important;
+  object-fit:cover!important; object-position:center 45%!important;
+  opacity:0!important; visibility:visible!important; z-index:1!important;
+  transform:scale(1.08) translate3d(0,0,0)!important;
+  transition:opacity 1.65s ease-in-out!important;
+  animation:none!important; will-change:opacity,transform;
+  backface-visibility:hidden;
+}
+.hero .hero-media.hero-slideshow .hero-photo.is-active {
+  opacity:1!important; z-index:2!important;
+  animation:rouseSlowPan 8s ease-in-out both!important;
+}
+.hero .hero-media.hero-slideshow:after {
+  content:""; position:absolute; inset:0; z-index:3; pointer-events:none;
+  background:linear-gradient(105deg,rgba(4,28,48,.72) 0%,rgba(5,58,102,.43) 48%,rgba(5,82,145,.30) 100%),rgba(8,76,132,.18);
+}
+.hero:before { z-index:3!important; pointer-events:none!important; }
+.hero:after { z-index:3!important; pointer-events:none!important; }
+.hero>.container,.hero-caption,.scroll-cue,.side-note {position:relative;z-index:4}
+@keyframes rouseSlowPan {
+  0% { transform:scale(1.06) translate3d(.7%,.25%,0)!important; }
+  100% { transform:scale(1.16) translate3d(-1.2%,-.65%,0)!important; }
+}
+@media(max-width:760px) {
+ .hero .hero-media.hero-slideshow .hero-photo {object-position:center center!important}
+ .hero .hero-media.hero-slideshow:after {background:linear-gradient(0deg,rgba(7,29,42,.40) 0%,rgba(5,48,83,.20) 100%),rgba(8,76,132,.16)}
+}
+@media(prefers-reduced-motion:reduce) {
+ .hero .hero-media.hero-slideshow .hero-photo {animation:none!important;transition:opacity .25s linear!important;transform:scale(1.03)!important}
+}

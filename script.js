@@ -32,3 +32,25 @@ if(heroSlides.length>1){
 // Gentle parallax on hero photo, disabled for reduced-motion users.
 // Keep the hero slideshow transform independent from scroll so fades remain visible on iOS.
 });
+
+/* Hero photo slideshow: CSS cross-fade + slow pan, works without video autoplay. */
+document.addEventListener('DOMContentLoaded', function () {
+  const slides = Array.from(document.querySelectorAll('.hero-slideshow .hero-photo'));
+  if (slides.length < 2) return;
+  let current = slides.findIndex(slide => slide.classList.contains('is-active'));
+  if (current < 0) { current = 0; slides[0].classList.add('is-active'); }
+  // Preload all frames early so transitions don't flash blank on mobile networks.
+  slides.forEach(slide => { const img = new Image(); img.src = slide.currentSrc || slide.src; });
+  window.setInterval(() => {
+    const previous = slides[current];
+    const nextIndex = (current + 1) % slides.length;
+    const next = slides[nextIndex];
+    next.classList.add('is-active');
+    previous.classList.remove('is-active');
+    // Restart the pan animation on each newly active photo.
+    next.style.animation = 'none';
+    void next.offsetWidth;
+    next.style.animation = '';
+    current = nextIndex;
+  }, 6500);
+});
