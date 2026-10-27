@@ -477,95 +477,381 @@ section.statement .checks li { display:flex !important; align-items:flex-start !
 .hero .hero-media img.hero-slide.active { opacity:1 !important; visibility:visible !important; }
 
 
-/* Native photo slideshow: no video element, no play control, iOS-friendly. */
-.hero .hero-media.hero-slideshow {
-  position:absolute!important; inset:0!important; overflow:hidden!important;
-  isolation:isolate!important; z-index:0!important; background:#071d2a!important;
+/* Section 03 photo collage: tall portrait frames with a deliberate stagger. */
+.latest-work .work-collage {
+  display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(10px,1.7vw,22px);
+  align-items:start; margin-top:clamp(34px,5vw,64px); width:100%; max-width:100%;
 }
-.hero .hero-media.hero-slideshow .hero-photo {
-  position:absolute!important; inset:0!important; display:block!important;
-  width:100%!important; height:100%!important; max-width:none!important;
-  object-fit:cover!important; object-position:center 45%!important;
-  opacity:0!important; visibility:visible!important; z-index:1!important;
-  transform:scale(1.08) translate3d(0,0,0);
-  transition:opacity 1.65s ease-in-out!important;
-  animation:none!important; will-change:opacity,transform;
-  backface-visibility:hidden;
+.latest-work .collage-photo { margin:0; min-width:0; overflow:hidden; aspect-ratio:3/4; background:#e7dfd2; }
+.latest-work .collage-photo:nth-child(2), .latest-work .collage-photo:nth-child(4) { margin-top:clamp(22px,4vw,54px); }
+.latest-work .collage-photo:nth-child(1), .latest-work .collage-photo:nth-child(3) { margin-top:0; }
+.latest-work .collage-photo img { display:block; width:100%; height:100%; object-fit:cover; transition:transform .8s cubic-bezier(.2,.7,.2,1); }
+.latest-work .collage-photo:hover img { transform:scale(1.045); }
+@media(max-width:760px) {
+  .latest-work .work-collage { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:30px; }
+  .latest-work .collage-photo { aspect-ratio:3/4; }
+  .latest-work .collage-photo:nth-child(2) { margin-top:24px; }
+  .latest-work .collage-photo:nth-child(3) { margin-top:-8px; }
+  .latest-work .collage-photo:nth-child(4) { margin-top:16px; }
 }
-.hero .hero-media.hero-slideshow .hero-photo.is-active {
-  opacity:1!important; z-index:2!important;
-  animation:rouseSlowPan 8s ease-in-out both!important;
+
+
+/* Section 03: one horizontal row of tall, narrow photo panels at every screen size. */
+.latest-work .work-collage {
+  display:grid !important;
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  gap:clamp(8px,1.4vw,18px) !important;
+  align-items:start !important;
+  margin-top:clamp(30px,4vw,52px) !important;
+  width:100% !important;
+  max-width:100% !important;
 }
-.hero .hero-media.hero-slideshow:after {
-  content:""; position:absolute; inset:0; z-index:3; pointer-events:none;
-  background:linear-gradient(105deg,rgba(4,28,48,.72) 0%,rgba(5,58,102,.43) 48%,rgba(5,82,145,.30) 100%),rgba(8,76,132,.18);
+.latest-work .collage-photo {
+  aspect-ratio: 2 / 5 !important;
+  width:100% !important;
+  min-width:0 !important;
+  margin:0 !important;
+  overflow:hidden !important;
 }
-.hero:before { z-index:3!important; pointer-events:none!important; }
-.hero:after { z-index:3!important; pointer-events:none!important; }
-.hero>.container,.hero-caption,.scroll-cue,.side-note {position:relative;z-index:4}
-@keyframes rouseSlowPan {
-  0% { transform:scale(1.06) translate3d(.7%,.25%,0); }
-  100% { transform:scale(1.16) translate3d(-1.2%,-.65%,0); }
+.latest-work .collage-photo:nth-child(2) { margin-top:22px !important; }
+.latest-work .collage-photo:nth-child(3) { margin-top:6px !important; }
+.latest-work .collage-photo:nth-child(4) { margin-top:30px !important; }
+.latest-work .collage-photo img {
+  width:100% !important;
+  height:100% !important;
+  display:block !important;
+  object-fit:cover !important;
 }
 @media(max-width:760px) {
- .hero .hero-media.hero-slideshow .hero-photo {object-position:center center!important}
- .hero .hero-media.hero-slideshow:after {background:linear-gradient(0deg,rgba(7,29,42,.40) 0%,rgba(5,48,83,.20) 100%),rgba(8,76,132,.16)}
+  .latest-work .work-collage {
+    grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+    gap:7px !important;
+    margin-top:26px !important;
+  }
+  .latest-work .collage-photo { aspect-ratio: 2 / 5 !important; }
+  .latest-work .collage-photo:nth-child(2) { margin-top:18px !important; }
+  .latest-work .collage-photo:nth-child(3) { margin-top:5px !important; }
+  .latest-work .collage-photo:nth-child(4) { margin-top:24px !important; }
+}
+
+
+/* Section 03 order: intro, image strip, then gallery CTA beneath the photos. */
+.latest-work .latest-work-head { display:block !important; }
+.latest-work .latest-work-head > div { max-width:100%; }
+.latest-work .latest-work-head .button { display:none !important; }
+.latest-work .latest-work-gallery-button { display:flex; justify-content:flex-start; margin-top:clamp(28px,4vw,44px); }
+.latest-work .latest-work-gallery-button .button { display:inline-flex !important; }
+@media(max-width:760px) {
+  .latest-work .latest-work-gallery-button { margin-top:26px; }
+  .latest-work .latest-work-gallery-button .button { width:100%; justify-content:space-between; }
+}
+
+
+/* Definitive hero slideshow: class-controlled opacity + independent cinematic zoom/drift. */
+.hero .hero-media { position:absolute !important; inset:0 !important; overflow:hidden !important; isolation:isolate !important; }
+.hero .hero-media img.hero-slide,
+.hero .hero-media img.hero-slide.active {
+  position:absolute !important; inset:0 !important; display:block !important;
+  width:100% !important; height:100% !important; object-fit:cover !important;
+  transition:opacity 1.8s ease-in-out !important;
+  animation:heroGtaDrift 22s ease-in-out infinite alternate !important;
+  will-change:opacity,transform; backface-visibility:hidden;
+}
+.hero .hero-media img.hero-slide { opacity:0 !important; z-index:1 !important; }
+.hero .hero-media img.hero-slide.active { opacity:1 !important; z-index:2 !important; }
+@keyframes heroGtaDrift {
+  0% { transform:scale(1.06) translate3d(.3%,.2%,0); }
+  100% { transform:scale(1.19) translate3d(-1.2%,-.8%,0); }
 }
 @media(prefers-reduced-motion:reduce) {
- .hero .hero-media.hero-slideshow .hero-photo {animation:none!important;transition:opacity .25s linear!important;transform:scale(1.03)!important}
+  .hero .hero-media img.hero-slide { animation:none !important; transform:scale(1.04) !important; transition:opacity .35s ease !important; }
 }
 
-/* FINAL OVERRIDE: smoother GTA-style pan/zoom on the homepage photos. */
-.hero .hero-media.hero-slideshow .hero-photo {
-  transform-origin:center center!important;
-  transition:opacity 1.6s ease-in-out!important;
-  will-change:opacity,transform;
+
+/* iOS-safe, CSS-only GTA-style hero slideshow.
+   This intentionally does not depend on JavaScript timers or class changes. */
+.hero .hero-media {
+  position:absolute !important; inset:0 !important; overflow:hidden !important;
+  isolation:isolate !important; background:#071d2a !important;
 }
-.hero .hero-media.hero-slideshow .hero-photo.is-active {
-  animation: rousePanLeft 8.5s ease-in-out both!important;
+.hero .hero-media img.hero-slide,
+.hero .hero-media img.hero-slide.active {
+  position:absolute !important; inset:0 !important; display:block !important;
+  width:100% !important; height:100% !important; object-fit:cover !important;
+  opacity:0 !important; z-index:1 !important;
+  animation:heroCssCrossfade 24s linear infinite, heroCssDrift 24s ease-in-out infinite alternate !important;
+  transition:none !important; will-change:opacity,transform;
+  backface-visibility:hidden;
 }
-.hero .hero-media.hero-slideshow .hero-photo:nth-child(2).is-active {
-  animation-name: rousePanRight!important;
+.hero .hero-media img.hero-slide:nth-child(1) { animation-delay:0s,0s !important; }
+.hero .hero-media img.hero-slide:nth-child(2) { animation-delay:-18s,-6s !important; }
+.hero .hero-media img.hero-slide:nth-child(3) { animation-delay:-12s,-12s !important; }
+.hero .hero-media img.hero-slide:nth-child(4) { animation-delay:-6s,-18s !important; }
+@keyframes heroCssCrossfade {
+  0%,20.83% { opacity:1 !important; }
+  25%,100% { opacity:0 !important; }
 }
-.hero .hero-media.hero-slideshow .hero-photo:nth-child(3).is-active {
-  animation-name: rousePanUp!important;
+@keyframes heroCssDrift {
+  0% { transform:scale(1.06) translate3d(.3%,.2%,0); }
+  100% { transform:scale(1.19) translate3d(-1.2%,-.8%,0); }
 }
-.hero .hero-media.hero-slideshow .hero-photo:nth-child(4).is-active {
-  animation-name: rousePanDown!important;
-}
-@keyframes rousePanLeft {
-  0% { transform:scale(1.07) translate3d(1.4%,.2%,0); }
-  100% { transform:scale(1.17) translate3d(-1.5%,-.7%,0); }
-}
-@keyframes rousePanRight {
-  0% { transform:scale(1.08) translate3d(-1.4%,.2%,0); }
-  100% { transform:scale(1.17) translate3d(1.5%,-.6%,0); }
-}
-@keyframes rousePanUp {
-  0% { transform:scale(1.07) translate3d(.4%,1.1%,0); }
-  100% { transform:scale(1.16) translate3d(-.6%,-1.2%,0); }
-}
-@keyframes rousePanDown {
-  0% { transform:scale(1.08) translate3d(-.6%,-1.1%,0); }
-  100% { transform:scale(1.17) translate3d(.7%,1.1%,0); }
-}
+/* Keep the cinematic motion even if iOS requests reduced motion; fades remain gentle. */
 @media(prefers-reduced-motion:reduce) {
- .hero .hero-media.hero-slideshow .hero-photo.is-active {animation:none!important;transform:scale(1.05)!important}
+  .hero .hero-media img.hero-slide,
+  .hero .hero-media img.hero-slide.active {
+    animation:heroCssCrossfade 24s linear infinite, heroCssDrift 36s ease-in-out infinite alternate !important;
+  }
 }
 
 
-/* Seamless hand-off: keep each outgoing photo frozen at its current pan position
-   during the crossfade instead of removing its animation and snapping to base scale. */
-.hero .hero-media.hero-slideshow .hero-photo {
-  animation-duration: 8.5s !important;
-  animation-timing-function: ease-in-out !important;
-  animation-fill-mode: both !important;
-  animation-play-state: paused !important;
+/* FINAL HERO FIX: keep the image stack visible in Safari/iOS and crossfade using opacity only. */
+.hero .hero-media { display:block !important; visibility:visible !important; opacity:1 !important; }
+.hero .hero-media img.hero-slide,
+.hero .hero-media img.hero-slide.active {
+  display:block !important; visibility:visible !important;
+  position:absolute !important; inset:0 !important;
+  width:100% !important; height:100% !important; object-fit:cover !important;
+  opacity:0 !important; z-index:1 !important;
+  animation:none !important; transition:opacity 1.8s ease-in-out !important;
+  transform:scale(1.06) translate3d(0,0,0) !important;
 }
-.hero .hero-media.hero-slideshow .hero-photo.is-active {
-  animation-play-state: running !important;
+.hero .hero-media img.hero-slide.active {
+  opacity:1 !important; z-index:2 !important;
+  animation:heroVisibleDrift 18s ease-in-out infinite alternate !important;
 }
-.hero .hero-media.hero-slideshow .hero-photo:nth-child(1) { animation-name: rousePanLeft !important; }
-.hero .hero-media.hero-slideshow .hero-photo:nth-child(2) { animation-name: rousePanRight !important; }
-.hero .hero-media.hero-slideshow .hero-photo:nth-child(3) { animation-name: rousePanUp !important; }
-.hero .hero-media.hero-slideshow .hero-photo:nth-child(4) { animation-name: rousePanDown !important; }
+@keyframes heroVisibleDrift {
+  from { transform:scale(1.06) translate3d(.3%,.2%,0) !important; }
+  to { transform:scale(1.17) translate3d(-1.2%,-.7%,0) !important; }
+}
+
+
+/* FINAL HERO FIX: visible image stack and iOS Safari-friendly active-image crossfade. */
+.hero .hero-media { display:block !important; visibility:visible !important; opacity:1 !important; }
+.hero .hero-media img.hero-slide,
+.hero .hero-media img.hero-slide.active {
+  display:block !important; visibility:visible !important;
+  position:absolute !important; inset:0 !important;
+  width:100% !important; height:100% !important; object-fit:cover !important;
+  opacity:0 !important; z-index:1 !important;
+  animation:none !important; transition:opacity 1.8s ease-in-out !important;
+  transform:scale(1.06) translate3d(0,0,0) !important;
+}
+.hero .hero-media img.hero-slide.active {
+  opacity:1 !important; z-index:2 !important;
+  animation:heroVisibleDrift 18s ease-in-out infinite alternate !important;
+}
+@keyframes heroVisibleDrift {
+  from { transform:scale(1.06) translate3d(.3%,.2%,0) !important; }
+  to { transform:scale(1.17) translate3d(-1.2%,-.7%,0) !important; }
+}
+
+
+/* Section 04 redesign: clear service menu with strong hierarchy and responsive two-row grid. */
+.statement {
+  display:block !important; width:100% !important; max-width:100% !important;
+  padding:clamp(44px,6vw,88px) max(24px,calc((100vw - 1180px)/2)) !important;
+  box-sizing:border-box !important; overflow:hidden !important;
+  background:linear-gradient(135deg,#071d2a 0%,#102f3d 62%,#174353 100%) !important;
+  color:#fff !important; position:relative !important;
+}
+.statement:before {
+  content:""; position:absolute; width:360px; height:360px; border:1px solid rgba(255,255,255,.09);
+  border-radius:50%; right:-120px; top:-140px; pointer-events:none;
+}
+.statement > .statement-copy {
+  display:block !important; position:relative !important; width:100% !important; max-width:1180px !important;
+  min-width:0 !important; margin:0 auto !important; padding:0 !important; box-sizing:border-box !important;
+}
+.statement .eyebrow { color:#d7b985 !important; letter-spacing:.15em; }
+.statement .section-title { max-width:850px !important; color:#fff !important; font-size:clamp(34px,5vw,64px) !important; line-height:1.02 !important; margin:18px 0 22px !important; }
+.statement .section-title em { color:#d7b985 !important; }
+.statement p.body-copy { max-width:760px !important; width:100% !important; color:rgba(255,255,255,.78) !important; font-size:17px !important; line-height:1.75 !important; margin:0 0 30px !important; overflow-wrap:break-word !important; }
+.extra-services-grid { display:grid !important; grid-template-columns:repeat(4,minmax(0,1fr)) !important; gap:12px !important; width:100% !important; margin:0 !important; }
+.extra-service { display:flex !important; align-items:flex-start !important; gap:12px !important; min-width:0 !important; padding:20px 17px !important; border:1px solid rgba(255,255,255,.15) !important; border-radius:12px !important; background:rgba(255,255,255,.055) !important; box-sizing:border-box !important; transition:background .2s ease,border-color .2s ease,transform .2s ease !important; }
+.extra-service:hover { background:rgba(255,255,255,.1) !important; border-color:rgba(215,185,133,.65) !important; transform:translateY(-2px); }
+.extra-service-icon { flex:0 0 27px !important; width:27px !important; height:27px !important; display:grid !important; place-items:center !important; border-radius:50% !important; background:rgba(215,185,133,.15) !important; color:#d7b985 !important; font-size:17px !important; }
+.extra-service h3 { margin:2px 0 8px !important; color:#fff !important; font-size:16px !important; line-height:1.3 !important; overflow-wrap:anywhere !important; }
+.extra-service p { margin:0 !important; color:rgba(255,255,255,.68) !important; font-size:13px !important; line-height:1.55 !important; overflow-wrap:break-word !important; }
+.statement-footer { display:flex !important; justify-content:space-between !important; align-items:center !important; gap:22px !important; flex-wrap:wrap !important; margin-top:28px !important; }
+.statement-promise { margin:0 !important; color:rgba(255,255,255,.72) !important; font-size:14px !important; }
+.statement .button { margin:0 !important; flex-shrink:0 !important; }
+@media(max-width:900px) { .extra-services-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; } }
+@media(max-width:560px) {
+ .statement { padding:42px 18px !important; }
+ .statement .section-title { font-size:clamp(31px,8.5vw,42px) !important; }
+ .statement p.body-copy { font-size:15px !important; line-height:1.7 !important; }
+ .extra-services-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:9px !important; }
+ .extra-service { display:block !important; padding:15px 12px !important; }
+ .extra-service-icon { margin-bottom:10px !important; }
+ .extra-service h3 { font-size:14px !important; }
+ .extra-service p { font-size:12px !important; }
+ .statement-footer { align-items:stretch !important; flex-direction:column !important; }
+ .statement .button { width:100% !important; justify-content:space-between !important; }
+}
+/* Hero image: one visible image at a time; JS swaps the source on a six-second timer. */
+.hero .hero-media { position:absolute !important; inset:0 0 0 43% !important; display:block !important; visibility:visible !important; opacity:1 !important; overflow:hidden !important; background:#071d2a !important; z-index:0 !important; }
+.hero .hero-media img.hero-slide { display:block !important; position:absolute !important; inset:0 !important; width:100% !important; height:100% !important; object-fit:cover !important; visibility:visible !important; opacity:1 !important; z-index:1 !important; animation:none !important; transition:opacity .45s ease-in-out !important; transform:scale(1.06) !important; }
+@media(max-width:760px) { .hero .hero-media { inset:0 !important; } }
+
+/* Section 2: expanded service menu — four columns on wide screens, two on mobile. */
+.service-grid { display:grid !important; grid-template-columns:repeat(4,minmax(0,1fr)) !important; gap:16px !important; }
+@media(max-width:900px){ .service-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:12px !important; } }
+@media(max-width:420px){ .service-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:9px !important; } .service-card { min-width:0 !important; padding:16px 13px !important; } .service-card h3 { overflow-wrap:anywhere !important; } }
+
+
+/* Section 02 full visual refresh + deterministic image-layer slideshow */
+.hero .hero-media{position:absolute!important;inset:0 0 0 43%!important;display:block!important;overflow:hidden!important;isolation:isolate!important;background:#071d2a!important;opacity:1!important;z-index:0!important}
+.hero .hero-media .hero-slide{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:cover!important;opacity:0!important;visibility:visible!important;z-index:1!important;transition:opacity 1.25s ease-in-out, transform 6s ease!important;transform:scale(1.04)!important;animation:none!important;will-change:opacity!important}
+.hero .hero-media .hero-slide.active{opacity:1!important;z-index:2!important;transform:scale(1.1)!important}
+.services-showcase{position:relative;background:#f5f1e8;padding:clamp(76px,8vw,118px) 0!important;overflow:hidden}
+.services-showcase:before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#bca27b,transparent)}
+.services-showcase-heading{display:grid;grid-template-columns:1.1fr .65fr;gap:8%;align-items:end;margin-bottom:42px}
+.services-showcase-heading .section-title{font-size:clamp(38px,5vw,64px);line-height:1.02;letter-spacing:-.055em;margin:14px 0 0}
+.services-showcase-heading .section-title em{font-style:normal;color:#98784d}
+.services-showcase-intro{padding-bottom:5px}
+.services-showcase-intro .body-copy{font-size:15px;line-height:1.8;max-width:430px;margin:0 0 20px;color:#56636a}
+.services-showcase .service-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important}
+.services-showcase .service-card{position:relative;display:flex;flex-direction:column;min-width:0;min-height:268px;padding:22px 20px 20px;background:#fffdf8;border:1px solid #e3d8c7;box-shadow:0 6px 20px rgba(7,29,42,.025);transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+.services-showcase .service-card:hover{transform:translateY(-5px);border-color:#b99a6c;box-shadow:0 18px 34px rgba(7,29,42,.09)}
+.services-showcase .service-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:27px}
+.services-showcase .service-num{font-size:9px;letter-spacing:.12em;font-weight:800;color:#7c8587}
+.services-showcase .service-icon{display:grid;place-items:center;width:39px;height:39px;flex-shrink:0;border-radius:50%;background:#f1e6d3;color:#8e7048;font-size:24px;line-height:1}
+.services-showcase .service-card h3{font:750 18px/1.2 'Manrope',sans-serif;letter-spacing:-.035em;margin:0 0 11px;color:#0a2637}
+.services-showcase .service-card p{font-size:12px;line-height:1.65;color:#65727a;margin:0 0 19px}
+.services-showcase .service-link{margin-top:auto;padding-top:13px;border-top:1px solid #e8dfd1;display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#344c58}
+.services-showcase .service-link b{font-size:17px;font-weight:400;color:#98784d}
+.services-bottom-note{margin-top:26px;padding:21px 24px;background:#071d2a;color:#fffdf7;display:flex;align-items:center;gap:20px}
+.services-bottom-note>span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#efd2a5;font-weight:800;white-space:nowrap}
+.services-bottom-note p{font-size:13px;color:#d6dedf;margin:0;flex:1}
+.services-bottom-note .button{white-space:nowrap;padding:12px 16px;font-size:11px}
+@media(max-width:1000px){
+ .services-showcase .service-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .services-showcase .service-card{min-height:235px}
+ .services-showcase-heading{gap:5%}
+}
+@media(max-width:760px){
+ .hero .hero-media{inset:0!important;opacity:1!important}
+ .hero .hero-media .hero-slide{transition:opacity 1s ease-in-out,transform 6s ease!important}
+ .services-showcase{padding:58px 0!important}
+ .services-showcase-heading{grid-template-columns:minmax(0,1fr);gap:18px;margin-bottom:26px}
+ .services-showcase-heading .section-title{font-size:clamp(34px,8.8vw,46px)!important;line-height:1.06!important}
+ .services-showcase-intro .body-copy{font-size:14px!important;margin-bottom:12px}
+ .services-showcase .service-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+ .services-showcase .service-card{min-height:230px;padding:16px 14px 15px}
+ .services-showcase .service-top{align-items:flex-start;margin-bottom:21px}
+ .services-showcase .service-num{font-size:8px;letter-spacing:.07em}
+ .services-showcase .service-icon{width:32px;height:32px;font-size:20px}
+ .services-showcase .service-card h3{font-size:15px;line-height:1.22}
+ .services-showcase .service-card p{font-size:11px;line-height:1.55}
+ .services-showcase .service-link{font-size:8px;letter-spacing:.025em}
+ .services-bottom-note{padding:20px;align-items:stretch;flex-direction:column;gap:8px}
+ .services-bottom-note .button{width:100%;justify-content:space-between}
+}
+@media(max-width:360px){.services-showcase .service-card{padding:13px 11px}.services-showcase .service-card h3{font-size:14px}}
+
+
+/* Section 02 full visual refresh + deterministic image-layer slideshow */
+.hero .hero-media{position:absolute!important;inset:0 0 0 43%!important;display:block!important;overflow:hidden!important;isolation:isolate!important;background:#071d2a!important;opacity:1!important;z-index:0!important}
+.hero .hero-media .hero-slide{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:cover!important;opacity:0!important;visibility:visible!important;z-index:1!important;transition:opacity 1.25s ease-in-out, transform 6s ease!important;transform:scale(1.04)!important;animation:none!important;will-change:opacity!important}
+.hero .hero-media .hero-slide.active{opacity:1!important;z-index:2!important;transform:scale(1.1)!important}
+.services-showcase{position:relative;background:#f5f1e8;padding:clamp(76px,8vw,118px) 0!important;overflow:hidden}
+.services-showcase:before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#bca27b,transparent)}
+.services-showcase-heading{display:grid;grid-template-columns:1.1fr .65fr;gap:8%;align-items:end;margin-bottom:42px}
+.services-showcase-heading .section-title{font-size:clamp(38px,5vw,64px);line-height:1.02;letter-spacing:-.055em;margin:14px 0 0}
+.services-showcase-heading .section-title em{font-style:normal;color:#98784d}
+.services-showcase-intro{padding-bottom:5px}
+.services-showcase-intro .body-copy{font-size:15px;line-height:1.8;max-width:430px;margin:0 0 20px;color:#56636a}
+.services-showcase .service-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important}
+.services-showcase .service-card{position:relative;display:flex;flex-direction:column;min-width:0;min-height:268px;padding:22px 20px 20px;background:#fffdf8;border:1px solid #e3d8c7;box-shadow:0 6px 20px rgba(7,29,42,.025);transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+.services-showcase .service-card:hover{transform:translateY(-5px);border-color:#b99a6c;box-shadow:0 18px 34px rgba(7,29,42,.09)}
+.services-showcase .service-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:27px}
+.services-showcase .service-num{font-size:9px;letter-spacing:.12em;font-weight:800;color:#7c8587}
+.services-showcase .service-icon{display:grid;place-items:center;width:39px;height:39px;flex-shrink:0;border-radius:50%;background:#f1e6d3;color:#8e7048;font-size:24px;line-height:1}
+.services-showcase .service-card h3{font:750 18px/1.2 'Manrope',sans-serif;letter-spacing:-.035em;margin:0 0 11px;color:#0a2637}
+.services-showcase .service-card p{font-size:12px;line-height:1.65;color:#65727a;margin:0 0 19px}
+.services-showcase .service-link{margin-top:auto;padding-top:13px;border-top:1px solid #e8dfd1;display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#344c58}
+.services-showcase .service-link b{font-size:17px;font-weight:400;color:#98784d}
+.services-bottom-note{margin-top:26px;padding:21px 24px;background:#071d2a;color:#fffdf7;display:flex;align-items:center;gap:20px}
+.services-bottom-note>span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#efd2a5;font-weight:800;white-space:nowrap}
+.services-bottom-note p{font-size:13px;color:#d6dedf;margin:0;flex:1}
+.services-bottom-note .button{white-space:nowrap;padding:12px 16px;font-size:11px}
+@media(max-width:1000px){.services-showcase .service-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.services-showcase .service-card{min-height:235px}.services-showcase-heading{gap:5%}}
+@media(max-width:760px){.hero .hero-media{inset:0!important;opacity:1!important}.hero .hero-media .hero-slide{transition:opacity 1s ease-in-out,transform 6s ease!important}.services-showcase{padding:58px 0!important}.services-showcase-heading{grid-template-columns:minmax(0,1fr);gap:18px;margin-bottom:26px}.services-showcase-heading .section-title{font-size:clamp(34px,8.8vw,46px)!important;line-height:1.06!important}.services-showcase-intro .body-copy{font-size:14px!important;margin-bottom:12px}.services-showcase .service-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}.services-showcase .service-card{min-height:230px;padding:16px 14px 15px}.services-showcase .service-top{align-items:flex-start;margin-bottom:21px}.services-showcase .service-num{font-size:8px;letter-spacing:.07em}.services-showcase .service-icon{width:32px;height:32px;font-size:20px}.services-showcase .service-card h3{font-size:15px;line-height:1.22}.services-showcase .service-card p{font-size:11px;line-height:1.55}.services-showcase .service-link{font-size:8px;letter-spacing:.025em}.services-bottom-note{padding:20px;align-items:stretch;flex-direction:column;gap:8px}.services-bottom-note .button{width:100%;justify-content:space-between}}
+@media(max-width:360px){.services-showcase .service-card{padding:13px 11px}.services-showcase .service-card h3{font-size:14px}}
+
+
+/* Final slideshow override: JS sets inline important opacity/z-index per slide. */
+.hero .hero-media{position:absolute!important;inset:0 0 0 43%!important;display:block!important;overflow:hidden!important;isolation:isolate!important;background:#071d2a!important;opacity:1!important;z-index:0!important}
+.hero .hero-media img.hero-slide{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:cover!important;visibility:visible!important;transition:opacity 1s ease-in-out!important;animation:none!important;transform:scale(1.06)!important;will-change:opacity!important}
+@media(max-width:760px){.hero .hero-media{inset:0!important}}
+
+
+/* FINAL: CSS-only hero slideshow. No JS timer or class switching required. */
+.hero .hero-media {
+  position:absolute !important; inset:0 0 0 43% !important; display:block !important;
+  overflow:hidden !important; isolation:isolate !important; background:#071d2a !important;
+  opacity:1 !important; z-index:0 !important;
+}
+.hero .hero-media img.hero-slide,
+.hero .hero-media img.hero-slide.active {
+  position:absolute !important; inset:0 !important; display:block !important;
+  width:100% !important; height:100% !important; max-width:none !important;
+  object-fit:cover !important; visibility:visible !important;
+  opacity:0 !important; z-index:1 !important; animation: rthHeroCrossfade 24s linear infinite !important;
+  transition:none !important; transform:scale(1.06) !important; will-change:opacity !important;
+}
+.hero .hero-media img.hero-slide:nth-child(1) { animation-delay:-1s !important; }
+.hero .hero-media img.hero-slide:nth-child(2) { animation-delay:-7s !important; }
+.hero .hero-media img.hero-slide:nth-child(3) { animation-delay:-13s !important; }
+.hero .hero-media img.hero-slide:nth-child(4) { animation-delay:-19s !important; }
+@keyframes rthHeroCrossfade {
+  0% { opacity:0 !important; }
+  4.2% { opacity:1 !important; }
+  20.8% { opacity:1 !important; }
+  25% { opacity:0 !important; }
+  100% { opacity:0 !important; }
+}
+@media (max-width:760px) { .hero .hero-media { inset:0 !important; } }
+@media (prefers-reduced-motion:reduce) {
+  .hero .hero-media img.hero-slide,
+  .hero .hero-media img.hero-slide.active { animation-duration:24s !important; }
+}
+
+/* Additional page polish: services and gallery */
+.services-page-section .detail-grid.services-eight{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:22px}
+.services-page-section .detail-card{min-width:0;display:flex;flex-direction:column;padding:26px 22px;border:1px solid var(--line);border-radius:3px;background:rgba(255,255,255,.42);transition:transform .25s,border-color .25s,box-shadow .25s}
+.services-page-section .detail-card:hover{transform:translateY(-4px);border-color:#b99c73;box-shadow:0 16px 34px #071d2a0b}
+.services-page-section .detail-card h2{font:700 clamp(18px,1.6vw,22px)/1.22 'Manrope',sans-serif;letter-spacing:-.03em;margin:0 0 12px}
+.services-page-section .detail-card p{font-size:13px;line-height:1.75;color:var(--muted);margin:0 0 20px}
+.services-page-section .detail-card .text-arrow{margin-top:auto;align-self:flex-start}
+.services-note{margin-top:30px;padding:25px 28px;background:var(--cream2);border-left:3px solid var(--gold);display:grid;grid-template-columns:1fr 2fr auto;align-items:center;gap:20px}
+.services-note strong{font:700 17px 'Manrope',sans-serif}.services-note p{font-size:13px;line-height:1.7;color:var(--muted);margin:0}.services-note .button{white-space:nowrap}
+.gallery-section .gallery{margin-top:0}.gallery-section .work-photo{min-height:170px}.gallery-section .work-photo img{width:100%;height:100%;object-fit:cover;display:block}.gallery-section .work-photo span:not(.photo-open){position:absolute;left:17px;right:17px;bottom:15px;z-index:2;color:#fff;font-size:11px;font-weight:700;text-shadow:0 2px 12px #000;background:linear-gradient(transparent,#071d2acc);padding-top:35px}.gallery-section .work-photo:after{pointer-events:none}.gallery-section .photo-open{position:absolute;right:14px;top:14px;z-index:3;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#071d2acc;color:white}
+@media(max-width:900px){.services-page-section .detail-grid.services-eight{grid-template-columns:repeat(2,minmax(0,1fr))}.services-note{grid-template-columns:1fr;gap:10px}.services-note .button{width:max-content}}
+@media(max-width:520px){.services-page-section .detail-grid.services-eight{grid-template-columns:1fr}.services-page-section .detail-card{padding:23px 20px}.gallery-section .gallery{grid-template-columns:1fr 1fr;grid-template-rows:245px 160px 160px 160px!important}.gallery-section .work-photo.gallery-feature,.gallery-section .work-photo.gallery-oven{grid-column:1/-1}.gallery-section .work-photo.gallery-feature{grid-row:auto}}
+
+/* FINAL PAN CONTINUITY FIX
+   The pan runs continuously on every slide, including hidden slides. Only opacity
+   changes at the crossfade, so the outgoing image never jumps back to frame one. */
+.hero .hero-media img.hero-slide,
+.hero .hero-media img.hero-slide.active {
+  animation-name: rthHeroCrossfade, rthHeroPanContinuous !important;
+  animation-duration: 24s, 12s !important;
+  animation-timing-function: linear, ease-in-out !important;
+  animation-iteration-count: infinite, infinite !important;
+  animation-direction: normal, alternate !important;
+  animation-fill-mode: both, both !important;
+  transition: none !important;
+  will-change: opacity, transform !important;
+}
+.hero .hero-media img.hero-slide:nth-child(1) { animation-delay: -1s, -1s !important; }
+.hero .hero-media img.hero-slide:nth-child(2) { animation-delay: -7s, -4s !important; }
+.hero .hero-media img.hero-slide:nth-child(3) { animation-delay: -13s, -7s !important; }
+.hero .hero-media img.hero-slide:nth-child(4) { animation-delay: -19s, -10s !important; }
+@keyframes rthHeroPanContinuous {
+  from { transform: scale(1.07) translate3d(1.2%, .35%, 0); }
+  to   { transform: scale(1.17) translate3d(-1.2%, -.65%, 0); }
+}
+@media (max-width:760px) {
+  .hero .hero-media img.hero-slide { object-position:center center !important; }
+}
