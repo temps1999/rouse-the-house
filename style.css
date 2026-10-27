@@ -514,3 +514,41 @@ section.statement .checks li { display:flex !important; align-items:flex-start !
 @media(prefers-reduced-motion:reduce) {
  .hero .hero-media.hero-slideshow .hero-photo {animation:none!important;transition:opacity .25s linear!important;transform:scale(1.03)!important}
 }
+
+/* FINAL OVERRIDE: smoother GTA-style pan/zoom on the homepage photos. */
+.hero .hero-media.hero-slideshow .hero-photo {
+  transform-origin:center center!important;
+  transition:opacity 1.6s ease-in-out!important;
+  will-change:opacity,transform;
+}
+.hero .hero-media.hero-slideshow .hero-photo.is-active {
+  animation: rousePanLeft 8.5s ease-in-out both!important;
+}
+.hero .hero-media.hero-slideshow .hero-photo:nth-child(2).is-active {
+  animation-name: rousePanRight!important;
+}
+.hero .hero-media.hero-slideshow .hero-photo:nth-child(3).is-active {
+  animation-name: rousePanUp!important;
+}
+.hero .hero-media.hero-slideshow .hero-photo:nth-child(4).is-active {
+  animation-name: rousePanDown!important;
+}
+@keyframes rousePanLeft {
+  0% { transform:scale(1.07) translate3d(1.4%,.2%,0)!important; }
+  100% { transform:scale(1.17) translate3d(-1.5%,-.7%,0)!important; }
+}
+@keyframes rousePanRight {
+  0% { transform:scale(1.08) translate3d(-1.4%,.2%,0)!important; }
+  100% { transform:scale(1.17) translate3d(1.5%,-.6%,0)!important; }
+}
+@keyframes rousePanUp {
+  0% { transform:scale(1.07) translate3d(.4%,1.1%,0)!important; }
+  100% { transform:scale(1.16) translate3d(-.6%,-1.2%,0)!important; }
+}
+@keyframes rousePanDown {
+  0% { transform:scale(1.08) translate3d(-.6%,-1.1%,0)!important; }
+  100% { transform:scale(1.17) translate3d(.7%,1.1%,0)!important; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .hero .hero-media.hero-slideshow .hero-photo.is-active {animation:none!important;transform:scale(1.05)!important}
+}
